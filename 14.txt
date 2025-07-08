@@ -1,0 +1,6 @@
+assets/
+└── images/
+    └── imoveis/
+        ├── casa1.jpg
+        ├── apartamento2.jpg
+        └── terreno3.jpg

@@ -1,0 +1,9 @@
+# 🏠 Imobiliária com Mapa Interativo
+
+Projeto de site de imobiliária com filtro de imóveis e mapa interativo usando Leaflet.js, Node.js e SQLite.
+
+## Como rodar localmente
+
+```bash
+npm install
+node server.js

@@ -1,0 +1,30 @@
+<select id="tipo">
+  <option value="todos">Todos</option>
+  <option value="casa">Casa</option>
+  <option value="apartamento">Apartamento</option>
+</select>
+
+<div id="lista-imoveis">
+  <!-- Imóveis serão listados aqui -->
+</div>
+
+<script>
+  const imoveis = [
+    { tipo: 'casa', nome: 'Casa no Centro' },
+    { tipo: 'apartamento', nome: 'Apartamento na Praia' }
+  ];
+
+  document.getElementById('tipo').addEventListener('change', function () {
+    const tipoSelecionado = this.value;
+    const lista = document.getElementById('lista-imoveis');
+    lista.innerHTML = '';
+
+    imoveis
+      .filter(imovel => tipoSelecionado === 'todos' || imovel.tipo === tipoSelecionado)
+      .forEach(imovel => {
+        const item = document.createElement('div');
+        item.textContent = imovel.nome;
+        lista.appendChild(item);
+      });
+  });
+</script>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Mapa de Imóveis</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <style>
+    #map { height: 500px; margin-top: 10px; }
+    select { padding: 8px; font-size: 16px; }
+  </style>
+</head>
+<body>
+  <h2>Filtrar Imóveis</h2>
+  <select id="filtro">
+    <option value="todos">Todos</option>
+    <option value="casa">Casa</option>
+    <option value="apartamento">Apartamento</option>
+    <option value="terreno">Terreno</option>
+  </select>
+  <div id="map"></div>
+
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

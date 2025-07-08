@@ -1,0 +1,8 @@
+imobiliaria-site/
+├── index.html
+├── README.md
+├── .gitignore
+├── assets/
+│   ├── css/
+│   ├── js/
+│   └── images/

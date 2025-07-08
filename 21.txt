@@ -1,0 +1,1 @@
+<a href="images/casa1.jpg" data-lightbox="galeria"><img src="images/casa1_thumb.jpg"></a>

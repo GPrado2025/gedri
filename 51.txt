@@ -1,0 +1,9 @@
+
+---
+
+### 🗃️ Etapa 3: Criar o banco de dados
+
+No terminal:
+
+```bash
+sqlite3 database.db

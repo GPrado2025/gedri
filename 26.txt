@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Mapa de Imóveis</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <style>
+    #map { height: 500px; width: 100%; margin-top: 10px; }
+    select { padding: 8px; font-size: 16px; }
+  </style>
+</head>
+<body>
+
+  <h2>Filtrar Imóveis</h2>
+  <select id="filtro">
+    <option value="todos">Todos</option>
+    <option value="casa">Casa</option>
+    <option value="apartamento">Apartamento</option>
+    <option value="terreno">Terreno</option>
+  </select>
+
+  <div id="map"></div>
+
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <script>
+    const map = L.map('map').setView([-23.433, -45.083], 13);
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '© OpenStreetMap'
+    }).addTo(map);
+
+    // Ícones personalizados
+    const icons = {
+      casa: L.icon({ iconUrl: 'https://cdn-icons-png.flaticon.com/512/69/69524.png', iconSize: [32, 32] }),
+      apartamento: L.icon({ iconUrl: 'https://cdn-icons-png.flaticon.com/512/809/809957.png', iconSize: [32, 32] }),
+      terreno: L.icon({ iconUrl: 'https://cdn-icons-png.flaticon.com/512/854/854878.png', iconSize: [32, 32] })
+    };
+
+    // Lista de imóveis
+    const imoveis = [
+      { nome: "Casa na Praia Vermelha", tipo: "casa", coords: [-23.441, -45.070] },
+      { nome: "Apartamento no Centro", tipo: "apartamento", coords: [-23.430, -45.080] },
+      { nome: "Terreno no Itaguá", tipo: "terreno", coords: [-23.420, -45.060] },
+      { nome: "Casa no Sertão", tipo: "casa", coords: [-23.445, -45.090] }
+    ];
+
+    let marcadores = [];
+
+    function atualizarMapa(tipoSelecionado) {
+      // Remove marcadores antigos
+      marcadores.forEach(m => map.removeLayer(m));
+      marcadores = [];
+
+      // Adiciona novos marcadores
+      imoveis
+        .filter(imovel => tipoSelecionado === 'todos' || imovel.tipo === tipoSelecionado)
+        .forEach(imovel => {
+          const marker = L.marker(imovel.coords, { icon: icons[imovel.tipo] })
+            .addTo(map)
+            .bindPopup(`<strong>${imovel.nome}</strong>`);
+          marcadores.push(marker);
+        });
+    }
+
+    // Inicializa com todos os imóveis
+    atualizarMapa('todos');
+
+    // Atualiza ao mudar o filtro
+    document.getElementById('filtro').addEventListener('change', function () {
+      atualizarMapa(this.value);
+    });
+  </script>
+
+</body>
+</html>

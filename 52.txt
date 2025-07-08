@@ -1,0 +1,12 @@
+CREATE TABLE imoveis (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  nome TEXT,
+  tipo TEXT,
+  latitude REAL,
+  longitude REAL
+);
+
+INSERT INTO imoveis (nome, tipo, latitude, longitude) VALUES
+('Casa na Praia Vermelha', 'casa', -23.441, -45.070),
+('Apartamento no Centro', 'apartamento', -23.430, -45.080),
+('Terreno no Itaguá', 'terreno', -23.420, -45.060);

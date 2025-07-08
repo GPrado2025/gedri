@@ -1,0 +1,8 @@
+imobiliaria-site/
+├── pages/
+│   ├── sobre.html
+│   ├── contato.html
+│   └── imoveis.html
+├── components/
+│   ├── header.html
+│   └── footer.html

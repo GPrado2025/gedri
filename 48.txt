@@ -1,0 +1,36 @@
+const map = L.map('map').setView([-23.433, -45.083], 13);
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
+
+const icons = {
+  casa: L.icon({ iconUrl: 'https://cdn-icons-png.flaticon.com/512/69/69524.png', iconSize: [32, 32] }),
+  apartamento: L.icon({ iconUrl: 'https://cdn-icons-png.flaticon.com/512/809/809957.png', iconSize: [32, 32] }),
+  terreno: L.icon({ iconUrl: 'https://cdn-icons-png.flaticon.com/512/854/854878.png', iconSize: [32, 32] })
+};
+
+let marcadores = [];
+let todosImoveis = [];
+
+function atualizarMapa(tipo) {
+  marcadores.forEach(m => map.removeLayer(m));
+  marcadores = [];
+
+  todosImoveis
+    .filter(imovel => tipo === 'todos' || imovel.tipo === tipo)
+    .forEach(imovel => {
+      const marker = L.marker([imovel.latitude, imovel.longitude], { icon: icons[imovel.tipo] })
+        .addTo(map)
+        .bindPopup(`<strong>${imovel.nome}</strong>`);
+      marcadores.push(marker);
+    });
+}
+
+fetch('/api/imoveis')
+  .then(res => res.json())
+  .then(data => {
+    todosImoveis = data;
+    atualizarMapa('todos');
+  });
+
+document.getElementById('filtro').addEventListener('change', function () {
+  atualizarMapa(this.value);
+});
